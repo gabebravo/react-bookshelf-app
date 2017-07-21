@@ -12,6 +12,7 @@ class BooksApp extends React.Component {
     read: []
   }
 
+  // uses filter method to split books array into categories by shelf
   updateBookShelfState = (books) => {
     this.setState({
       booksInShelf: books,

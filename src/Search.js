@@ -22,8 +22,8 @@ class Search extends Component {
 */ 
   updateSearchTerm = (e) => {
     const { ids, booksInShelf } = this.state;
-
     this.setState({ searchTerm: e.target.value });
+
       if(e.target.value.length > 0 ){
         BooksAPI.search(e.target.value, 20)
           .then( books => {
@@ -41,8 +41,12 @@ class Search extends Component {
       }
   }
 
+  /* More simple algorithm used to update a book's shelf status
+    on the Search page. It would update the status as soon as it
+    is changed. */ 
   updateBookShelf = (bookID, ev) => {
     const shelf = ev.target.value;
+    
      BooksAPI.update({ id: bookID }, shelf )
       .then( () => { 
         const arr = this.state.books.map( book => {
