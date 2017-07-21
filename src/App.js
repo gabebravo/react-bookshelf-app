@@ -6,6 +6,7 @@ import ListBooks from './ListBooks'
 
 class BooksApp extends React.Component {
   state = {
+    booksInShelf: [],
     currentlyReading: [],
     wantToRead: [],
     read: []
@@ -13,6 +14,7 @@ class BooksApp extends React.Component {
 
   updateBookShelfState = (books) => {
     this.setState({
+      booksInShelf: books,
       currentlyReading: books.filter( book => (book.shelf === "currentlyReading") ),
       wantToRead: books.filter( book => (book.shelf === "wantToRead") ),
       read: books.filter( book => (book.shelf === "read") ) 
@@ -76,7 +78,10 @@ class BooksApp extends React.Component {
                 </div>
               </div>
             </div>
-            <Link to="/search" className="open-search" />
+            <Link className="open-search" to={{ 
+              pathname: "/search", 
+              state: { booksInShelf: this.state.booksInShelf }
+              }}/>
           </div>
         }
       </div>
