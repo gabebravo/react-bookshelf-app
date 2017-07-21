@@ -21,22 +21,24 @@ class Search extends Component {
     I then return it in place of the non-shelf categorized book.
 */ 
   updateSearchTerm = (e) => {
+    const { ids, booksInShelf } = this.state;
+
     this.setState({ searchTerm: e.target.value });
-    if(e.target.value.length > 0 ){
-      BooksAPI.search(e.target.value, 20)
-        .then( books => {
-          const matches = books.map( book => {
-            if( this.state.ids.indexOf(book.id) >= 0 ) {
-              return this.state.booksInShelf[this.state.ids.indexOf(book.id)]
-            } else {
-              return book              
-            }
+      if(e.target.value.length > 0 ){
+        BooksAPI.search(e.target.value, 20)
+          .then( books => {
+            const matches = books.map( book => {
+              if( ids.indexOf(book.id) >= 0 ) {
+                return booksInShelf[ids.indexOf(book.id)]
+              } else {
+                return book              
+              }
+            })
+            this.setState({ books: matches });
           })
-          this.setState({ books: matches });
-        })
-    } else {
-      this.setState({ books: [] });
-    }
+      } else {
+        this.setState({ books: [] });
+      }
   }
 
   updateBookShelf = (bookID, ev) => {
