@@ -36,6 +36,9 @@ class Search extends Component {
             })
             this.setState({ books: matches });
           })
+          .catch( error => {
+            console.log('there is no match');
+          })
       } else {
         this.setState({ books: [] });
       }
