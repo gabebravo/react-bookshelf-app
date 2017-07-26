@@ -62,6 +62,9 @@ class Search extends Component {
         })
         this.setState({ books: arr });
       })
+      .catch( error => {
+        console.log('there is no match');
+      })
   }
 
   render() {
